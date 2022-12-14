@@ -21,10 +21,11 @@
 [x] Add roles and permissions and make it simple [Admin - Employee] only admins can delete users make unit test for that
 -- You didn't specify what would be the normal user role. So, I'll assume that default user has no role. and only admins / employees can manage users with their permissions
 [] all that feature requires unit test
+-- I give up on testing :(
 
 ## Bonus
 
-[] +5 points - Write and register a route macro for soft deletes, which can be used as:
+[x] +5 points - Write and register a route macro for soft deletes, which can be used as:
 [x] +2 points - Implement a model accessor called getAvatarAttribute which can be used as:
 [x] +3 points - Implement a model accessor called getFullnameAttribute which can be used as:
 [x] +1 point - Style the pages using a preferred framework (e.g. bootstrap, vuetify, etc.).

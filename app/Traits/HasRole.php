@@ -27,6 +27,6 @@ trait HasRole
     {
         if (!$this->role) return false;
 
-        return $this->role->permissions()->where('slug', $permission)->count();
+        return (bool) $this->role->permissions()->where('slug', $permission)->count();
     }
 }

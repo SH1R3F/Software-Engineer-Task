@@ -36,6 +36,8 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });
+
+        $this->registerSoftDeletesMacro();
     }
 
     /**
@@ -47,6 +49,15 @@ class RouteServiceProvider extends ServiceProvider
     {
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+        });
+    }
+
+    protected function registerSoftDeletesMacro()
+    {
+        Route::macro('softDeletes', function ($route, $controller) {
+            Route::get("$route/trashed", [app("App\Http\Controllers\\$controller")::class, 'trashed'])->name("$route.trashed");
+            Route::patch("$route/{user}/restore", [app("App\Http\Controllers\\$controller")::class, 'restore'])->name("$route.restore");
+            Route::delete("$route/{user}/delete", [app("App\Http\Controllers\\$controller")::class, 'delete'])->name("$route.delete");
         });
     }
 }
