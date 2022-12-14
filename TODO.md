@@ -3,8 +3,8 @@
 ## Goals
 
 [x] Implement Laravel’s default login feature
-[] Develop User CRUD functionalities
-[] Make Roles and Permissions without any package
+[x] Develop User CRUD functionalities
+[x] Make Roles and Permissions without any package
 
 ## Steps
 
