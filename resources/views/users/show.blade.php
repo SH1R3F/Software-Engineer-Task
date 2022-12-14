@@ -20,8 +20,9 @@
                         <h2>@ {{ $user->username }}</h2>
 
                         <div class="d-flex justify-content-center gap-1">
-                            <a class="btn btn-primary" href="{{ route('users.edit', $user->id) }}">Edit</a>
-                            <button class="btn btn-danger">Delete</button>
+                            @can('edit-user')
+                                <a class="btn btn-primary" href="{{ route('users.edit', $user->id) }}">Edit</a>
+                            @endcan
                         </div>
 
                     </div>
