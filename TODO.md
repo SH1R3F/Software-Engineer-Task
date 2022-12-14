@@ -17,7 +17,7 @@
 [x] Add a button to delete a user (users.destroy).
 [x] Add a page to list all soft deleted users (users.trashed).
 [x] Add a button to restore a soft deleted user (users.restore).
-[] Add a button to permanently delete a soft deleted user (users.delete).
+[x] Add a button to permanently delete a soft deleted user (users.delete).
 [] Add roles and permissions and make it simple [Admin - Employee] only admins can delete users make unit test for that
 [] all that feature requires unit test
 

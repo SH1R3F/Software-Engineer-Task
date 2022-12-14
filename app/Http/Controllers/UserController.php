@@ -151,7 +151,21 @@ class UserController extends Controller
      */
     public function restore($id)
     {
-        User::onlyTrashed()->findOrFail($id)->restore();
+        $user = User::onlyTrashed()->findOrFail($id);
+        $user->restore();
         return redirect()->route('users.trashed')->with('status', 'User restored successfully');
+    }
+
+    /**
+     * Permanently delete a trashed resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        $user = User::onlyTrashed()->findOrFail($id);
+        $user->forceDelete();
+        return redirect()->route('users.trashed')->with('status', 'User deleted successfully');
     }
 }
