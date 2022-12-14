@@ -2,14 +2,15 @@
 
 namespace App\Services;
 
-use App\Models\User;
 use App\Models\Profile;
-use Illuminate\Http\UploadedFile;
+use App\Traits\UploadAvatar;
 use Illuminate\Database\Eloquent\Model;
 use App\Repositories\UserRepositoryInterface;
 
 class UserService implements UserServiceInterface
 {
+
+    use UploadAvatar;
 
     private $userRepository;
 
@@ -140,19 +141,6 @@ class UserService implements UserServiceInterface
         return $this->userRepository->permanentlyDeleteUser($id);
     }
 
-
-    /**
-     * Upload the given file.
-     *
-     * @param  \Illuminate\Http\UploadedFile $file
-     * @return string
-     */
-    public function upload(UploadedFile $file)
-    {
-        // Upload avatar
-        $avatar = $file->store('avatars', ['disk' => 'public']);
-        return "storage/$avatar";
-    }
 
     /**
      * Generate random hash key.
