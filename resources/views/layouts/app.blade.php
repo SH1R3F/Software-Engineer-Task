@@ -53,6 +53,11 @@
                                 </li>
                             @endif
                         @else
+                            @role('Admin')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('logs.index') }}">{{ __('Employees log') }}</a>
+                                </li>
+                            @endcan
                             @can('list-user')
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('users.index') }}">{{ __('Users') }}</a>

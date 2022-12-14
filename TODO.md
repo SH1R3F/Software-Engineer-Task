@@ -38,7 +38,7 @@
 [x] Write Unit testing for the service class
 [x] Add Validation rules to the User CRUD
 [x] Implement a repository pattern for User CRUD
-[] Tracking every Employee in the system who take the actions and display it for new page the admins only can visit that page without any pacakge
+[x] Tracking every Employee in the system who take the actions and display it for new page the admins only can visit that page without any pacakge
 
 ## Steps
 

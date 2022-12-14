@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ActivityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,5 @@ Route::middleware(['auth', 'role:Admin,Employee'])->group(function () {
 
     Route::resource('users', UserController::class);
 });
+
+Route::get('/logs', ActivityController::class)->middleware('role:Admin')->name('logs.index');
