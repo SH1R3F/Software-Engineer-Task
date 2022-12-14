@@ -6,8 +6,12 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
-                        {{ __('Users') }}
-                        <a href="{{ route('users.create') }}" class="btn btn-success btn-sm">Add</a>
+                        {{ request()->is('users') ? 'Users' : 'Trashed users' }}
+                        <div>
+                            <a href="{{ route('users.create') }}" class="btn btn-success btn-sm">Add</a>
+                            <a href="{{ route(request()->is('users') ? 'users.trashed' : 'users.index') }}"
+                                class="btn btn-secondary btn-sm">{{ request()->is('users') ? 'Trashed users' : 'Users' }}</a>
+                        </div>
                     </div>
 
                     <div class="card-body">

@@ -130,4 +130,16 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('users.index')->with('status', 'User deleted successfully');
     }
+
+    /**
+     * Display a listing of the trashed resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function trashed()
+    {
+        $users = User::onlyTrashed()->paginate(10);
+
+        return view('users.index', compact('users'));
+    }
 }
