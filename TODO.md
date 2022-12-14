@@ -18,7 +18,8 @@
 [x] Add a page to list all soft deleted users (users.trashed).
 [x] Add a button to restore a soft deleted user (users.restore).
 [x] Add a button to permanently delete a soft deleted user (users.delete).
-[] Add roles and permissions and make it simple [Admin - Employee] only admins can delete users make unit test for that
+[x] Add roles and permissions and make it simple [Admin - Employee] only admins can delete users make unit test for that
+-- You didn't specify what would be the normal user role. So, I'll assume that default user has no role. and only admins / employees can manage users with their permissions
 [] all that feature requires unit test
 
 ## Bonus

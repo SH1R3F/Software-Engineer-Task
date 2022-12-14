@@ -9,10 +9,16 @@
                         {{ request()->is('users') ? 'Users' : 'Trashed users' }}
                         <div>
                             @if (request()->is('users'))
-                                <a href="{{ route('users.create') }}" class="btn btn-success btn-sm">Add</a>
-                                <a href="{{ route('users.trashed') }}" class="btn btn-secondary btn-sm">Trashed users</a>
+                                @can('create-user')
+                                    <a href="{{ route('users.create') }}" class="btn btn-success btn-sm">Add</a>
+                                @endcan
+                                @can('list-deleted-user')
+                                    <a href="{{ route('users.trashed') }}" class="btn btn-secondary btn-sm">Trashed users</a>
+                                @endcan
                             @else
-                                <a href="{{ route('users.index') }}" class="btn btn-secondary btn-sm">Users</a>
+                                @can('list-user')
+                                    <a href="{{ route('users.index') }}" class="btn btn-secondary btn-sm">Users</a>
+                                @endcan
                             @endif
                         </div>
                     </div>
@@ -46,28 +52,37 @@
                                         <td>{{ $user->email }}</td>
                                         <td>
                                             @if (request()->is('users'))
-                                                <a class="btn-sm btn btn-primary"
-                                                    href="{{ route('users.show', $user->id) }}">Show</a>
-                                                <form action="{{ route('users.destroy', $user->id) }}" method="POST"
-                                                    class="d-inline">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <button type="submit" class="btn-sm btn btn-danger">Delete</button>
-                                                </form>
+                                                @can('show-user')
+                                                    <a class="btn-sm btn btn-primary"
+                                                        href="{{ route('users.show', $user->id) }}">Show</a>
+                                                @endcan
+
+                                                @can('delete-user')
+                                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST"
+                                                        class="d-inline">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <button type="submit" class="btn-sm btn btn-danger">Delete</button>
+                                                    </form>
+                                                @endcan
                                             @else
-                                                <form action="{{ route('users.restore', $user->id) }}" method="POST"
-                                                    class="d-inline">
-                                                    @method('PATCH')
-                                                    @csrf
-                                                    <button type="submit" class="btn-sm btn btn-warning">Restore</button>
-                                                </form>
-                                                <form action="{{ route('users.delete', $user->id) }}" method="POST"
-                                                    class="d-inline">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <button type="submit" class="btn-sm btn btn-danger">Delete
-                                                        permanently</button>
-                                                </form>
+                                                @can('restore-user')
+                                                    <form action="{{ route('users.restore', $user->id) }}" method="POST"
+                                                        class="d-inline">
+                                                        @method('PATCH')
+                                                        @csrf
+                                                        <button type="submit" class="btn-sm btn btn-warning">Restore</button>
+                                                    </form>
+                                                @endcan
+                                                @can('force-delete-user')
+                                                    <form action="{{ route('users.delete', $user->id) }}" method="POST"
+                                                        class="d-inline">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <button type="submit" class="btn-sm btn btn-danger">Delete
+                                                            permanently</button>
+                                                    </form>
+                                                @endcan
                                             @endif
                                         </td>
                                     </tr>

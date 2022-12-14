@@ -15,6 +15,24 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        User::create([
+            'firstname' => 'Admin',
+            'lastname'  => 'Mahmoud',
+            'username'  => 'admin-mahmoud',
+            'email'     => 'admin@task.com',
+            'password'  => bcrypt('password'),
+            'role_id'   => 1
+        ]);
+
+        User::create([
+            'firstname' => 'Employee',
+            'lastname'  => 'Mahmoud',
+            'username'  => 'employee-mahmoud',
+            'email'     => 'employee@task.com',
+            'password'  => bcrypt('password'),
+            'role_id'   => 2
+        ]);
+
         User::factory(30)->create();
     }
 }

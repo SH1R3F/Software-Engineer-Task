@@ -15,6 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
+
+        $this->authorize('list-user');
+
         $users = User::orderBy('id', 'DESC')->paginate(10);
 
         return view('users.index', compact('users'));
@@ -27,6 +30,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        $this->authorize('create-user');
+
+
         return view('users.create');
     }
 
@@ -38,6 +44,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create-user');
+
         // Validate Request
         $validated = $request->validate([
             'avatar'    => ['nullable', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
@@ -69,6 +77,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $this->authorize('show-user');
+
         return view('users.show', compact('user'));
     }
 
@@ -80,6 +90,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $this->authorize('edit-user');
+
         return view('users.edit', compact('user'));
     }
 
@@ -92,6 +104,9 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+
+        $this->authorize('edit-user');
+
         // Validate Request
         $validated = $request->validate([
             'avatar'    => ['nullable', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
@@ -127,6 +142,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+
+        $this->authorize('delete-user');
+
         $user->delete();
         return redirect()->route('users.index')->with('status', 'User deleted successfully');
     }
@@ -138,6 +156,9 @@ class UserController extends Controller
      */
     public function trashed()
     {
+
+        $this->authorize('list-deleted-user');
+
         $users = User::onlyTrashed()->paginate(10);
 
         return view('users.index', compact('users'));
@@ -151,6 +172,9 @@ class UserController extends Controller
      */
     public function restore($id)
     {
+
+        $this->authorize('restore-user');
+
         $user = User::onlyTrashed()->findOrFail($id);
         $user->restore();
         return redirect()->route('users.trashed')->with('status', 'User restored successfully');
@@ -164,6 +188,9 @@ class UserController extends Controller
      */
     public function delete($id)
     {
+
+        $this->authorize('force-delete-user');
+
         $user = User::onlyTrashed()->findOrFail($id);
         $user->forceDelete();
         return redirect()->route('users.trashed')->with('status', 'User deleted successfully');
