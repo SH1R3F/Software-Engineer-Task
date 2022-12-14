@@ -142,4 +142,16 @@ class UserController extends Controller
 
         return view('users.index', compact('users'));
     }
+
+    /**
+     * Restore a trashed resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        User::onlyTrashed()->findOrFail($id)->restore();
+        return redirect()->route('users.trashed')->with('status', 'User restored successfully');
+    }
 }

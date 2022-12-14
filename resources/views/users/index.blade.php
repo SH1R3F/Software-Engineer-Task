@@ -42,13 +42,23 @@
                                         </td>
                                         <td>{{ $user->email }}</td>
                                         <td>
-                                            <a class="btn btn-primary" href="{{ route('users.show', $user->id) }}">Show</a>
-                                            <form action="{{ route('users.destroy', $user->id) }}" method="POST"
-                                                class="d-inline">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                            </form>
+                                            @if (request()->is('users'))
+                                                <a class="btn-sm btn btn-primary"
+                                                    href="{{ route('users.show', $user->id) }}">Show</a>
+                                                <form action="{{ route('users.destroy', $user->id) }}" method="POST"
+                                                    class="d-inline">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button type="submit" class="btn-sm btn btn-danger">Delete</button>
+                                                </form>
+                                            @else
+                                                <form action="{{ route('users.restore', $user->id) }}" method="POST"
+                                                    class="d-inline">
+                                                    @method('PATCH')
+                                                    @csrf
+                                                    <button type="submit" class="btn-sm btn btn-warning">Restore</button>
+                                                </form>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

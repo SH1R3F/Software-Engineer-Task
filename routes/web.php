@@ -24,4 +24,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 /* Manage trashed users */
 Route::get('users/trashed', [UserController::class, 'trashed'])->name('users.trashed');
+Route::patch('users/{user}/restore', [UserController::class, 'restore'])->name('users.restore');
 Route::resource('users', UserController::class)->middleware('auth');
