@@ -30,6 +30,8 @@ class User extends Authenticatable
         'email',
         'password',
         'photo',
+        'ip_address',
+        'last_at',
     ];
 
     /**
@@ -49,6 +51,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'last_at' => 'datetime',
     ];
 
     public function getFullnameAttribute()
