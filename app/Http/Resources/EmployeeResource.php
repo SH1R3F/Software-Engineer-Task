@@ -21,7 +21,7 @@ class EmployeeResource extends JsonResource
             'email' => $this->email,
             'avatar' => url($this->avatar),
             'role' => $this->whenLoaded('role', $this->role->name),
-            'last_at' => $this->last_at->diffForHumans(),
+            'last_at' => $this->last_at->diffForHumans(), // Format at whatever you want
             'ip_address' => $this->ip_address
         ];
     }

@@ -59,6 +59,7 @@
 
 [x] Generate a table called details to save additional user background information
 [] Create facade to the only current user can update he's data and the admins
+-- انت عاوز ايه حضرتك؟
 <s>[] use docker in the project</s>
 [x] make a trait to all image actions like upload or update or delete
 [x] Generate api for retrieving all regular employees with the [last_at, ip_address] ip he's login with and last time use sanctum for authentication
