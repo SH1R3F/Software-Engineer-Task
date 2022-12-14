@@ -116,17 +116,18 @@ class UserController extends Controller
         $user->update($validated);
 
         // Return response
-        return redirect()->back()->with('status', 'User created successfuly');
+        return redirect()->route('users.index')->with('status', 'User created successfuly');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('users.index')->with('status', 'User deleted successfully');
     }
 }

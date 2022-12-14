@@ -14,7 +14,7 @@
 [x] Add a page to display a single user (users.show).
 [x] Add a page to display the form to create a new user (users.create).
 [X] Add a page to edit a user (users.edit / users.update).
-[] Add a button to delete a user (users.destroy).
+[x] Add a button to delete a user (users.destroy).
 [] Add a page to list all soft deleted users (users.trashed).
 [] Add a button to restore a soft deleted user (users.restore).
 [] Add a button to permanently delete a soft deleted user (users.delete).
