@@ -3,9 +3,10 @@
 namespace App\Services;
 
 use App\Models\User;
-use App\Repositories\UserRepositoryInterface;
+use App\Models\Profile;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Database\Eloquent\Model;
+use App\Repositories\UserRepositoryInterface;
 
 class UserService implements UserServiceInterface
 {
@@ -43,7 +44,14 @@ class UserService implements UserServiceInterface
         $attributes['password'] = $this->hash($attributes['password']);
 
         // Create user
-        return $this->userRepository->createUser($attributes);
+        $user = $this->userRepository->createUser($attributes);
+
+        // Update details
+        if (isset($attributes['country'])) {
+            $user->profile()->updateOrCreate(['country' => $attributes['country']]);
+        }
+
+        return $user;
     }
 
     /**
@@ -79,7 +87,13 @@ class UserService implements UserServiceInterface
         }
 
         // Update user       
-        return $this->userRepository->updateUser($id, $attributes);
+        $update = $this->userRepository->updateUser($id, $attributes);
+
+        // Update details
+        if (isset($attributes['country'])) {
+            Profile::updateOrCreate(['user_id' => $id], ['country' => $attributes['country']]);
+        }
+        return $update;
     }
 
     /**

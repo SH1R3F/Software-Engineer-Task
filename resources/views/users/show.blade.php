@@ -18,6 +18,7 @@
 
                         <h1>{{ $user->fullname }}</h1>
                         <h2>@ {{ $user->username }}</h2>
+                        <h3>{{ $user->profile?->country }}</h3>
 
                         <div class="d-flex justify-content-center gap-1">
                             @can('edit-user')

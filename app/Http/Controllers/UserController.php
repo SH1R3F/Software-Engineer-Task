@@ -71,20 +71,22 @@ class UserController extends Controller
 
         $user = $this->userService->find($id);
 
-        return view('users.show', compact('user'));
+        return view('users.show', ['user' => $user->load('profile')]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  User  $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
         $this->authorize('edit-user');
 
-        return view('users.edit', compact('user'));
+        $user = $this->userService->find($id);
+
+        return view('users.edit', ['user' => $user->load('profile')]);
     }
 
     /**

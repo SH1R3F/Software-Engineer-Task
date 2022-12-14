@@ -43,6 +43,7 @@ class UserRequest extends FormRequest
                 Rule::when(request()->isMethod('PUT'), 'nullable'),
                 'min:6'
             ],
+            'country'  => ['nullable'],
         ];
     }
 }

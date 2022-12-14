@@ -49,6 +49,11 @@
                                     value="{{ old('email', $user->email) }}">
                             </div>
                             <div class="col-md-6">
+                                <label for="country" class="form-label">Country</label>
+                                <input type="text" class="form-control" id="country" name="country"
+                                    value="{{ old('country', $user->profile?->country) }}">
+                            </div>
+                            <div class="col-12">
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" class="form-control" id="password" name="password">
                             </div>

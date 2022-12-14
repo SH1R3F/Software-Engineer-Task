@@ -42,6 +42,11 @@
                                     value="{{ old('email') }}">
                             </div>
                             <div class="col-md-6">
+                                <label for="country" class="form-label">Country</label>
+                                <input type="text" class="form-control" id="country" name="country"
+                                    value="{{ old('country') }}">
+                            </div>
+                            <div class="col-md-12">
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" class="form-control" id="password" name="password">
                             </div>

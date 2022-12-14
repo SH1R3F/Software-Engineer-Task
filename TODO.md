@@ -52,3 +52,13 @@
 -- ليه يسطا؟
 [x] Create a Request class file `/app/Http/Requests/UserRequest.php`, and add the rules
 [x] Use the UserRequest class as the first parameter to `UserController@store` and `UserController@update`
+
+# Level 3
+
+## Goals
+
+[x] Generate a table called details to save additional user background information
+[] Create facade to the only current user can update he's data and the admins
+[] use docker in the project
+[] make a trait to all image actions like upload or update or delete
+[] Generate api for retrieving all regular employees with the [last_at, ip_address] ip he's login with and last time use sanctum for authentication
