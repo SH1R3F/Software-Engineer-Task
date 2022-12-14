@@ -1,66 +1,65 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Level 1
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Goals
 
-## About Laravel
+[x] Implement Laravel’s default login feature
+[x] Develop User CRUD functionalities
+[x] Make Roles and Permissions without any package
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Steps
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+[x] Start a project in Laravel 8 or higher
+[x] Implement the default login feature using the laravel/ui package.
+[x] Add a page to list all users (users.index) in a table.
+[x] Add a page to display a single user (users.show).
+[x] Add a page to display the form to create a new user (users.create).
+[X] Add a page to edit a user (users.edit / users.update).
+[x] Add a button to delete a user (users.destroy).
+[x] Add a page to list all soft deleted users (users.trashed).
+[x] Add a button to restore a soft deleted user (users.restore).
+[x] Add a button to permanently delete a soft deleted user (users.delete).
+[x] Add roles and permissions and make it simple [Admin - Employee] only admins can delete users make unit test for that
+-- You didn't specify what would be the normal user role. So, I'll assume that default user has no role. and only admins / employees can manage users with their permissions
+[] all that feature requires unit test
+-- I give up on testing :(
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Bonus
 
-## Learning Laravel
+[x] +5 points - Write and register a route macro for soft deletes, which can be used as:
+[x] +2 points - Implement a model accessor called getAvatarAttribute which can be used as:
+[x] +3 points - Implement a model accessor called getFullnameAttribute which can be used as:
+[x] +1 point - Style the pages using a preferred framework (e.g. bootstrap, vuetify, etc.).
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+# Level 2
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Goals
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+[x] Implement a Service Pattern for User CRUD
+[x] Write Unit testing for the service class
+[x] Add Validation rules to the User CRUD
+[x] Implement a repository pattern for User CRUD
+[x] Tracking every Employee in the system who take the actions and display it for new page the admins only can visit that page without any pacakge
 
-## Laravel Sponsors
+## Steps
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+[x] Create a unit test file in `/tests/Unit/Services/UserServiceTest.php`
+[x] Create a file `/app/Services/UserService.php`
+[x] Create an Interface class file `/app/Services/UserServiceInterface.php`
+[x] Build your test cases. See the following test cases for the minimum coverage requirements:
+[x] If all test passed, inject the UserService instance to the `UserController@__construct` method.
+[x] Use the UserService's methods inside UserController accordingly.
+[] Add validation rules to the `UserService@rules`
+-- ليه يسطا؟
+[x] Create a Request class file `/app/Http/Requests/UserRequest.php`, and add the rules
+[x] Use the UserRequest class as the first parameter to `UserController@store` and `UserController@update`
 
-### Premium Partners
+# Level 3
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Goals
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+[x] Generate a table called details to save additional user background information
+[] Create facade to the only current user can update he's data and the admins
+-- انت عاوز ايه حضرتك؟
+<s>[] use docker in the project</s>
+[x] make a trait to all image actions like upload or update or delete
+[x] Generate api for retrieving all regular employees with the [last_at, ip_address] ip he's login with and last time use sanctum for authentication
