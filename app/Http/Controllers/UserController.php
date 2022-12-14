@@ -91,15 +91,15 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  User  $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, User $user)
+    public function update(UserRequest $request, $id)
     {
 
         $this->authorize('edit-user');
 
-        $this->userService->update($user, $request->validated());
+        $this->userService->update($id, $request->validated());
 
         // Return response
         return redirect()->route('users.index')->with('status', 'User created successfuly');
@@ -108,14 +108,14 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  User  $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
         $this->authorize('delete-user');
 
-        $this->userService->destroy($user);
+        $this->userService->destroy($id);
 
         return redirect()->route('users.index')->with('status', 'User deleted successfully');
     }

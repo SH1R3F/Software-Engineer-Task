@@ -3,11 +3,19 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Repositories\UserRepositoryInterface;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Database\Eloquent\Model;
 
 class UserService implements UserServiceInterface
 {
+
+    private $userRepository;
+
+    public function __construct(UserRepositoryInterface $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
 
     /**
      * Retrieve all resources and paginate.
@@ -16,7 +24,7 @@ class UserService implements UserServiceInterface
      */
     public function list()
     {
-        return User::orderBy('id', 'DESC')->paginate(10);
+        return $this->userRepository->allUsers();
     }
 
     /**
@@ -35,7 +43,7 @@ class UserService implements UserServiceInterface
         $attributes['password'] = $this->hash($attributes['password']);
 
         // Create user
-        return User::create($attributes);
+        return $this->userRepository->createUser($attributes);
     }
 
     /**
@@ -47,18 +55,19 @@ class UserService implements UserServiceInterface
      */
     public function find(int $id)
     {
-        return User::findOrFail($id);
+        return $this->userRepository->getUserById($id);
     }
 
     /**
      * Update model resource.
      *
-     * @param  User  $user
+     * @param  int  $id
      * @param  array   $attributes
      * @return boolean
      */
-    public function update(User $user, array $attributes): bool
+    public function update(int $id, array $attributes): bool
     {
+
         if (isset($attributes['avatar'])) {
             $attributes['photo'] = $this->upload($attributes['avatar']);
         }
@@ -69,19 +78,19 @@ class UserService implements UserServiceInterface
             $attributes['password'] = $this->hash($attributes['password']);
         }
 
-        // Update user
-        return $user->update($attributes);
+        // Update user       
+        return $this->userRepository->updateUser($id, $attributes);
     }
 
     /**
      * Soft delete model resource.
      *
-     * @param  User  $user
+     * @param  int  $id
      * @return void
      */
-    public function destroy(User $user)
+    public function destroy(int $id)
     {
-        $user->delete();
+        return $this->userRepository->destroyUser($id);
     }
 
 
@@ -92,7 +101,7 @@ class UserService implements UserServiceInterface
      */
     public function listTrashed()
     {
-        return User::onlyTrashed()->paginate(10);
+        return $this->userRepository->trashedUsers();
     }
 
     /**
@@ -103,9 +112,7 @@ class UserService implements UserServiceInterface
      */
     public function restore($id)
     {
-
-        $user = User::onlyTrashed()->findOrFail($id);
-        $user->restore();
+        return $this->userRepository->restoreTrashedUser($id);
     }
 
     /**
@@ -116,8 +123,7 @@ class UserService implements UserServiceInterface
      */
     public function delete($id)
     {
-        $user = User::onlyTrashed()->findOrFail($id);
-        $user->forceDelete();
+        return $this->userRepository->permanentlyDeleteUser($id);
     }
 
 

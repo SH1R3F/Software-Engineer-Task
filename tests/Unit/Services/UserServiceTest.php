@@ -25,7 +25,7 @@ class UserServiceTest extends TestCase
      */
     public function it_can_return_a_paginated_list_of_users()
     {
-        $users = (new UserService)->list();
+        $users = app()->make(UserService::class)->list();
 
         $this->assertInstanceOf(LengthAwarePaginator::class, $users);
     }
@@ -46,7 +46,7 @@ class UserServiceTest extends TestCase
         ];
 
         // Actions
-        (new UserService)->store($user);
+        app()->make(UserService::class)->store($user);
 
 
         // Assertions
@@ -63,7 +63,7 @@ class UserServiceTest extends TestCase
         $user = User::factory()->create();
 
         // Actions
-        $found = (new UserService)->find($user->id);
+        $found = app()->make(UserService::class)->find($user->id);
 
         // Assertions
         $this->assertEquals($user->id, $found->id);
@@ -81,10 +81,10 @@ class UserServiceTest extends TestCase
         ]);
 
         // Actions
-        (new UserService)->update($user, ['firstname' => 'mahmoud']);
+        app()->make(UserService::class)->update($user->id, ['firstname' => 'mahmoud']);
 
         // Assertions
-        $this->assertEquals('mahmoud', $user->firstname);
+        $this->assertEquals('mahmoud', User::find($user->id)->firstname);
     }
 
     /**
@@ -98,7 +98,7 @@ class UserServiceTest extends TestCase
 
 
         // Actions
-        (new UserService)->destroy(User::first());
+        app()->make(UserService::class)->destroy(User::first()->id);
 
         // Assertions
         $this->assertEquals(9, User::count());
@@ -113,7 +113,7 @@ class UserServiceTest extends TestCase
         // Arrangements
 
         // Actions
-        $trashed = (new UserService)->listTrashed();
+        $trashed = app()->make(UserService::class)->listTrashed();
 
         // Assertions
         $this->assertInstanceOf(LengthAwarePaginator::class, $trashed);
@@ -129,13 +129,13 @@ class UserServiceTest extends TestCase
         $user = User::factory()->create();
 
         // Actions
-        (new UserService)->destroy($user);
-        $beforeRestore = (new UserService)->list();
-        (new UserService)->restore($user->id);
+        app()->make(UserService::class)->destroy($user->id);
+        $beforeRestore = app()->make(UserService::class)->list();
+        app()->make(UserService::class)->restore($user->id);
 
         // Assertions
         $this->assertEquals(0, $beforeRestore->count());
-        $this->assertEquals(1, (new UserService)->list()->count());
+        $this->assertEquals(1, app()->make(UserService::class)->list()->count());
     }
 
     /**
@@ -148,13 +148,13 @@ class UserServiceTest extends TestCase
         $user = User::factory()->create();
 
         // Actions
-        (new UserService)->destroy($user);
-        $beforePermanentDelete = (new UserService)->listTrashed();
-        (new UserService)->delete($user->id);
+        app()->make(UserService::class)->destroy($user->id);
+        $beforePermanentDelete = app()->make(UserService::class)->listTrashed();
+        app()->make(UserService::class)->delete($user->id);
 
         // Assertions
         $this->assertEquals(1, $beforePermanentDelete->count());
-        $this->assertEquals(0, (new UserService)->listTrashed()->count());
+        $this->assertEquals(0, app()->make(UserService::class)->listTrashed()->count());
     }
 
     /**
@@ -167,7 +167,7 @@ class UserServiceTest extends TestCase
         $file = UploadedFile::fake()->image('avatar.jpg');
 
         // Actions
-        $path = (new UserService)->upload($file);
+        $path = app()->make(UserService::class)->upload($file);
 
         // Assertions
         $this->assertTrue(\File::exists(public_path($path)));

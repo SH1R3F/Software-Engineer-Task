@@ -37,7 +37,7 @@
 [x] Implement a Service Pattern for User CRUD
 [x] Write Unit testing for the service class
 [x] Add Validation rules to the User CRUD
-[] Implement a repository pattern for User CRUD
+[x] Implement a repository pattern for User CRUD
 [] Tracking every Employee in the system who take the actions and display it for new page the admins only can visit that page without any pacakge
 
 ## Steps
@@ -47,7 +47,7 @@
 [x] Create an Interface class file `/app/Services/UserServiceInterface.php`
 [x] Build your test cases. See the following test cases for the minimum coverage requirements:
 [x] If all test passed, inject the UserService instance to the `UserController@__construct` method.
-[] Use the UserService's methods inside UserController accordingly.
+[x] Use the UserService's methods inside UserController accordingly.
 [] Add validation rules to the `UserService@rules`
 -- ليه يسطا؟
 [x] Create a Request class file `/app/Http/Requests/UserRequest.php`, and add the rules
