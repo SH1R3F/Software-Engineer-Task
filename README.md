@@ -63,3 +63,11 @@
 <s>[] use docker in the project</s><br>
 [x] make a trait to all image actions like upload or update or delete<br>
 [x] Generate api for retrieving all regular employees with the [last_at, ip_address] ip he's login with and last time use sanctum for authentication<br>
+
+# Installation
+
+1- Install dependencies `composer install`<br>
+2- Update environment variables `mv .env.example .env` and update database credentials<br>
+3- Generate laravel key `php artisan key:generate`<br>
+4- Migrate and seed to have the default data to run the application `php artisan migrate:fresh --seed`<br>
+5- Run and enjoy the application `php artisan serve`
